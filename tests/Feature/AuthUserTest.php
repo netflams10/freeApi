@@ -2,33 +2,29 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use App\Models\User;
 
-class UserTest extends TestCase
+class AuthUserTest extends TestCase
 {
     use DatabaseMigrations;
-
     /**
-     * @group createUser
+     * @group login
+     *
      * @return void
      */
-    public function test_if_user_can_register()
+    public function test_login_user_auth()
     {
-        $this->withoutExceptionHandling();
-        $payload = [
+        User::factory()->create([
             'first_name' => 'Opeyemi',
             'last_name' => 'Jegede',
             'email' => 'segope44@gmail.com',
             'password' => 'johnson10',
             'username' => 'netflams10',
-        ];
-
-        $resp = $this->json('post','api/registerUser', $payload);
-
-        $resp->assertStatus(200)
-            ->assertJson(['message' => "We will confirm and send an Activation Mail later"]);
+            'status' => 'active'
+        ]);
     }
 }

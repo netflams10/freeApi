@@ -14,7 +14,8 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "goldspecdigital/laravel-eloquent-uuid": "^8.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
