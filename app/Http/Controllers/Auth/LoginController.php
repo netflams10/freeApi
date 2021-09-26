@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function __construct ()
-    {
-        $this->middleware("auth:api",["except" => "login"]);
-    }
+//    public function __construct ()
+//    {
+//        $this->middleware("auth:api",["except" => "login"]);
+//    }
 
 
     /**
@@ -21,11 +21,10 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt(["email" => $credentials["email"], "password" => $credentials["password"], "status" => "active"])) {
-            return response()->json(['error' => 'Email Or Password is Incorrect!'], 401);
+        if ($token = auth()->attempt(["email" => $credentials["email"], "password" => $credentials["password"]])) {
+            return $this->respondWithToken($token);
         }
-
-        return $this->respondWithToken($token);
+        return response()->json(['error' => 'Email Or Password is Incorrect!'], 401);
     }
 
 
@@ -36,7 +35,7 @@ class LoginController extends Controller
      */
     public function getUser()
     {
-        return response()->json(auth()->user(), 200);
+         return response()->json(auth()->user(), 200);
     }
 
     /**
@@ -49,16 +48,6 @@ class LoginController extends Controller
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out'], 200);
-    }
-
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
-    {
-        return $this->respondWithToken(auth()->refresh());
     }
 
 

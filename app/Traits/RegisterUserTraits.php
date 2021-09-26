@@ -10,7 +10,7 @@
 
         private function notifyNewUser ($user)
         {
-            $user->notify(new RegisterUserNotification($user));
+            // $user->notify(new RegisterUserNotification($user));
             return response()->json(["message" => "We will confirm and send an Activation Mail later"], 200);
         }
 

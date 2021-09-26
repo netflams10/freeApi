@@ -60,4 +60,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function created_at ()
+    {
+        return $this->created_at->toFormattedDateString();
+    }
+
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
 use App\Traits\RegisterUserTraits;
-use Illuminate\Http\Request;
 
 
 class RegisterController extends Controller
